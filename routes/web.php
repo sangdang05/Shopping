@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//----Route Group Users----//
+
+
+/*
+|--------------------------------------------------------------------------
+| Route Group Users
+|--------------------------------------------------------------------------
+*/
 
 Route::group([
     'namespace' => 'App\Http\Controllers',
@@ -24,14 +30,17 @@ Route::group([
         'prefix' => ''
     ], function () {
         Route::get('/', [
-            'as' => 'HomeController.index',
+            'as' => 'home.index',
             'uses' => 'HomeController@index',
         ]);
     });
 });
 
-
-//----Route Group Admin----//
+/*
+|--------------------------------------------------------------------------
+| Route Group Admin
+|--------------------------------------------------------------------------
+*/
 Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'prefix' => '',

@@ -13,6 +13,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+//Route Group User
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => '',
+    'middleware' => [
+
+    ],
+], function () {
+    Route::group([
+        'prefix' => ''
+    ], function () {
+        Route::get('/', [
+            'as' => 'HomeController.index',
+            'uses' => 'HomeController@index',
+        ]);
+    });
+
 });
+
+
+
+
+//Route Group Admin
+Route::group([
+    'namespace' => 'App\Http\Controllers\Admin',
+    'prefix' => 'Admin',
+    'middleware' => [
+
+    ],
+], function () {
+    Route::group([
+        'prefix' => 'admin'
+    ], function () {
+        Route::get('/', [
+            'as' => 'admin.DashboardController.index',
+            'uses' => 'DashboardController@index',
+        ]);
+    });
+
+});
+
+
+

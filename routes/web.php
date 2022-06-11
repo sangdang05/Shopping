@@ -12,7 +12,47 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//----Route Group Users----//
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'middleware' => [
+        // registered middleware here
+    ],
+], function () {
+    Route::group([
+        'prefix' => ''
+    ], function () {
+        Route::get('/', [
+            'as' => 'HomeController.index',
+            'uses' => 'HomeController@index',
+        ]);
+    });
 });
+
+
+//----Route Group Admin----//
+Route::group([
+    'namespace' => 'App\Http\Controllers\Admin',
+    'prefix' => '',
+    'middleware' => [
+        // registered middleware here
+    ],
+], function () {
+    // Route pre-fix admin
+    Route::group([
+        'prefix' => 'admin'
+    ], function () {
+        Route::get('/', [
+            'as' => 'admin.DashboardController.index',
+            'uses' => 'DashboardController@index',
+        ]);
+        Route::get('/login', [
+            'as' => 'admin.LoginController.index',
+            'uses' => 'LoginController@index',
+        ]);
+    });
+});
+
+
+

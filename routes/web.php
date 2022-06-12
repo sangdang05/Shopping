@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 | Route Group Users
 |--------------------------------------------------------------------------
 */
-
 Route::group([
     'namespace' => 'App\Http\Controllers',
     'middleware' => [
@@ -45,7 +44,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'prefix' => '',
     'middleware' => [
-        // registered middleware here
+        // Registered middleware here
     ],
 ], function () {
     // Route pre-fix admin
@@ -60,7 +59,94 @@ Route::group([
             'as' => 'admin.LoginController.index',
             'uses' => 'LoginController@index',
         ]);
+
+        /*---------------------
+        | Route Admin Product |
+        ----------------------*/
+        Route::group([
+            'prefix' => 'admin/product',
+            ['middleware' => [
+            // registered middleware here
+            ]]
+        ], function () {
+            // Crud routes
+            Route::get('/', [
+                'as' => 'admin.ProductController.index',
+                'uses' => 'ProductController@index'
+            ]);
+
+            Route::get('create', [
+                'as' => 'admin.ProductController.create',
+                'uses' => 'ProductController@create'
+            ]);
+
+            Route::post('store', [
+                'as' => 'admin.ProductController.store',
+                'uses' => 'ProductController@store'
+            ]);
+
+            Route::get('edit/{id}', [
+                'as' => 'admin.ProductController.edit',
+                'uses' => 'ProductController@edit'
+            ]);
+
+            Route::put('update/{id}', [
+                'as' => 'admin.ProductController.update',
+                'uses' => 'ProductController@update'
+            ]);
+
+            Route::delete('destroy/{id}', [
+                'as' => 'admin.ProductController.destroy',
+                'uses' => 'ProductController@destroy'
+            ]);
+        });
+
+        /*---------------------
+        | Route Admin Category |
+        ----------------------*/
+        Route::group([
+            'prefix' => 'admin/Category',
+            ['middleware' => [
+            // registered middleware here
+            ]]
+        ], function () {
+            // Crud routes
+            Route::get('/', [
+                'as' => 'admin.CategoryController.index',
+                'uses' => 'CategoryController@index'
+            ]);
+
+            Route::get('create', [
+                'as' => 'admin.CategoryController.create',
+                'uses' => 'CategoryController@create'
+            ]);
+
+            Route::post('store', [
+                'as' => 'admin.CategoryController.store',
+                'uses' => 'CategoryController@store'
+            ]);
+
+            Route::get('edit/{id}', [
+                'as' => 'admin.CategoryController.edit',
+                'uses' => 'CategoryController@edit'
+            ]);
+
+            Route::put('update/{id}', [
+                'as' => 'admin.CategoryController.update',
+                'uses' => 'CategoryController@update'
+            ]);
+
+            Route::delete('destroy/{id}', [
+                'as' => 'admin.CategoryController.destroy',
+                'uses' => 'CategoryController@destroy'
+            ]);
+        });
+
+
     });
+
+
+
 });
 
 

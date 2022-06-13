@@ -54,6 +54,7 @@ Route::group([
         Route::get('/', [
             'as' => 'admin.DashboardController.index',
             'uses' => 'DashboardController@index',
+            // registered permission here
         ]);
         Route::get('/login', [
             'as' => 'admin.LoginController.index',

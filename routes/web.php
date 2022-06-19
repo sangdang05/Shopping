@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Response;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 | Route Group Users
 |--------------------------------------------------------------------------
 */
+
 Route::group([
     'namespace' => 'App\Http\Controllers',
     'middleware' => [
@@ -65,39 +66,39 @@ Route::group([
         | Route Admin Product |
         ----------------------*/
         Route::group([
-            'prefix' => 'admin/product',
+            'prefix' => '/product',
             ['middleware' => [
             // registered middleware here
             ]]
         ], function () {
             // Crud routes
             Route::get('/', [
-                'as' => 'admin.ProductController.index',
+                'as' => 'admin.product.index',
                 'uses' => 'ProductController@index'
             ]);
 
             Route::get('create', [
-                'as' => 'admin.ProductController.create',
+                'as' => 'admin.product.create',
                 'uses' => 'ProductController@create'
             ]);
 
             Route::post('store', [
-                'as' => 'admin.ProductController.store',
+                'as' => 'admin.product.store',
                 'uses' => 'ProductController@store'
             ]);
 
             Route::get('edit/{id}', [
-                'as' => 'admin.ProductController.edit',
+                'as' => 'admin.product.edit',
                 'uses' => 'ProductController@edit'
             ]);
 
             Route::put('update/{id}', [
-                'as' => 'admin.ProductController.update',
+                'as' => 'admin.product.update',
                 'uses' => 'ProductController@update'
             ]);
 
             Route::delete('destroy/{id}', [
-                'as' => 'admin.ProductController.destroy',
+                'as' => 'admin.product.destroy',
                 'uses' => 'ProductController@destroy'
             ]);
         });
@@ -106,47 +107,44 @@ Route::group([
         | Route Admin Category |
         ----------------------*/
         Route::group([
-            'prefix' => 'admin/Category',
+            'prefix' => '/category',
             ['middleware' => [
             // registered middleware here
             ]]
         ], function () {
             // Crud routes
             Route::get('/', [
-                'as' => 'admin.CategoryController.index',
+                'as' => 'admin.category.index',
                 'uses' => 'CategoryController@index'
             ]);
 
             Route::get('create', [
-                'as' => 'admin.CategoryController.create',
+                'as' => 'admin.category.create',
                 'uses' => 'CategoryController@create'
             ]);
 
             Route::post('store', [
-                'as' => 'admin.CategoryController.store',
+                'as' => 'admin.category.store',
                 'uses' => 'CategoryController@store'
             ]);
 
             Route::get('edit/{id}', [
-                'as' => 'admin.CategoryController.edit',
+                'as' => 'admin.category.edit',
                 'uses' => 'CategoryController@edit'
             ]);
 
             Route::put('update/{id}', [
-                'as' => 'admin.CategoryController.update',
+                'as' => 'admin.category.update',
                 'uses' => 'CategoryController@update'
             ]);
 
             Route::delete('destroy/{id}', [
-                'as' => 'admin.CategoryController.destroy',
+                'as' => 'admin.category.destroy',
                 'uses' => 'CategoryController@destroy'
             ]);
         });
 
-
     });
-
-
 
 });
 

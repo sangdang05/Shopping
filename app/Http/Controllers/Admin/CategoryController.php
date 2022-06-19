@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::orderBy('created_at','DESC')->get();
+        return view('admin.category.index',compact('category'));
     }
 
     /**
@@ -25,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $category= Category::where('status',1)->get();
+        return view('admin.category.create',compact('category'));
     }
 
     /**
@@ -36,7 +39,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('upload_image')){
+            $file = $request->upload_image;
+            $ext = $request->upload_image->extension();
+            $file_name = time().'_'.'category.'.$ext;
+            $file->move(public_path('uploads/category'),$file_name);
+            $request->merge(['image'=>$file_name]);
+        }
+        Category::create($request->all());
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -56,9 +67,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit',compact('category'));
     }
 
     /**
@@ -68,9 +80,23 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        if($request->hasFile('upload_image'))
+        {
+            $destination = public_path('uploads/category/').$category->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->upload_image;
+            $ext = $request->upload_image->extension();
+            $file_name = time().'_'.'category.'.$ext;
+            $file->move(public_path('uploads/category'),$file_name);
+            $request->merge(['image'=>$file_name]);
+        }
+        $category->update($request->all());
+        return redirect()->route('admin.category.index')->with('success','Thêm danh mục thành công');
     }
 
     /**
@@ -79,8 +105,19 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        if($category->products->count()>0){
+            return redirect()->route('admin.category.index')->with('error','Danh mục chứa sản phẩm, không thể xóa!');
+        }
+        else{
+            $destination = public_path('uploads/category').$category->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+             }
+             $category->delete();
+             return redirect()->route('admin.category.index')->with('success','Xóa danh mục thành công!');
+        }
     }
 }

@@ -70,10 +70,8 @@
 							<li class="active-menu">
 								<a href="{{route('home.index')}}">TRANG CHỦ</a>
 							</li>
-
 							<li>
-								<a >SẢN PHẨM</a>
-
+								<a href="#" >SẢN PHẨM</a>
 								<ul class="sub-menu">
 								@foreach($category as $item)
 									<li><a href="#">{{$item->name}}</a></li>

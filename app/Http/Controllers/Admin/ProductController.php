@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Category;
+
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,7 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::orderBy('created_at','DESC')->get();
+        return view('admin.product.index',compact('product'));
     }
 
     /**
@@ -25,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $category= Category::where('status',1)->get();
+        return view('admin.product.create',compact('category'));
     }
 
     /**
@@ -36,7 +41,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('upload_image')){
+            $file = $request->upload_image;
+            $ext = $request->upload_image->extension();
+            $file_name = time().'_'.'product.'.$ext;
+            $file->move(public_path('uploads/product'),$file_name);
+            $request->merge(['image'=>$file_name]);
+        }
+        Product::create($request->all());
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -56,9 +69,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $category= Category::where('status',1)->get();
+        return view('admin.product.edit',compact('product','category'));
     }
 
     /**
@@ -68,9 +83,23 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        if($request->hasFile('upload_image'))
+        {
+            $destination = public_path('uploads/product/').$product->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->upload_image;
+            $ext = $request->upload_image->extension();
+            $file_name = time().'_'.'product.'.$ext;
+            $file->move(public_path('uploads/product'),$file_name);
+            $request->merge(['image'=>$file_name]);
+        }
+        $product->update($request->all());
+        return redirect()->route('admin.product.index')->with('success','Thêm sản phẩm thành công');
     }
 
     /**
@@ -79,8 +108,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('admin.product.index')->with('success','Xóa sản phẩm thành công');
     }
 }

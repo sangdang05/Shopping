@@ -1,0 +1,7 @@
+.navbar-vertical.navbar-expand-xs .navbar-collapse {
+    height: auto !important;
+  }
+  .text-red{
+    color: red;
+    font-size: 0.7rem;
+  }

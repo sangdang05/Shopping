@@ -48,7 +48,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="column-5">{{ number_format($priceEnd,0, '', '.') . ' VND'  }}
+                                                <td class="column-5">{{ number_format($priceEnd, 0, '', '.') . ' VND' }}
                                                 </td>
                                                 <td class="p-r-15">
                                                     <a href="/carts/delete/{{ $product->id }}">Xóa</a>
@@ -92,7 +92,7 @@
 
                                 <div class="size-209 p-t-1">
                                     <span class="mtext-110 cl2">
-                                        {{ number_format($total, 0, '', '.').' VND' }}
+                                        {{ number_format($total, 0, '', '.') . ' VND' }}
                                     </span>
                                 </div>
                             </div>

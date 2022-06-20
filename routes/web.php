@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 /*
@@ -46,29 +47,29 @@ Route::group([
 | Route Group Admin
 |--------------------------------------------------------------------------
 */
+
+//--Route Login Admin--//
+Route::prefix('admin/login')->group( function (){
+    Route::get('/',[LoginController::class,'index'])->name('login');
+    Route::post('/',[LoginController::class,'postLogin']);
+});
+
 Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
-    'prefix' => '',
-    'middleware' => [
-        // Registered middleware here
-    ],
+    'prefix' => '/',
+
 ], function () {
     // Route pre-fix admin
     Route::group([
-        'prefix' => 'admin'
+        'prefix' => 'admin',
+        'middleware' => [
+        'auth',
+    ]
     ], function () {
         Route::get('/', [
             'as' => 'admin.dashboard.index',
             'uses' => 'DashboardController@index',
             // registered permission here
-        ]);
-        Route::get('/login', [
-            'as' => 'login',
-            'uses' => 'LoginController@index',
-        ]);
-        Route::post('/login', [
-            'as' => 'login',
-            'uses' => 'LoginController@postLogin',
         ]);
         Route::get('/logout', [
             'as' => 'admin.logout',
@@ -80,9 +81,6 @@ Route::group([
         ----------------------*/
         Route::group([
             'prefix' => '/product',
-            'middleware' => [
-                'auth'
-            ]
         ], function () {
             // Crud routes
             Route::get('/', [
@@ -121,9 +119,7 @@ Route::group([
         ----------------------*/
         Route::group([
             'prefix' => '/category',
-            'middleware' => [
-                'auth'
-            ]
+
         ], function () {
             // Crud routes
             Route::get('/', [

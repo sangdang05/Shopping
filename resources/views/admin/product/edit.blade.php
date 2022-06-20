@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin')
 @section('css')
 <link href="{{ url('siteadmin') }}/css/style.css" rel="stylesheet" />
 @endsection

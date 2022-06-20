@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $product = Product::orderBy('created_at','DESC')->get();
         $category = Category::where('status',1)->orderBy('created_at','DESC')->limit(3)->get();
-        return view('user.home',compact('category','product'));
+        return view('home',compact('category','product'));
     }
     public function view($id,$slug)
     {

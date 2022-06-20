@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin')
+@extends('layouts.admin')
 @section('main')
 <div class="colum card container-fluid py-4 px-4">
 <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">

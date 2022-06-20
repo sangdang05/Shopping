@@ -1,4 +1,4 @@
-@extends('layouts.user._site')
+@extends('layouts.site')
 @section('title',$modelCategory->name)
 @section('main')
 	<!-- breadcrumb -->

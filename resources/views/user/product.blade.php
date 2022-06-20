@@ -1,4 +1,4 @@
-@extends('layouts.user._site')
+@extends('layouts.site')
 @section('title', $products->name)
 
 @section('main')
@@ -67,6 +67,7 @@
 				</div>
 
 				<div class="col-md-6 col-lg-5 p-b-30">
+
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 							{{$products->name}}
@@ -79,8 +80,6 @@
 						<p class="stext-102 cl3 p-t-23">
 							{{$products->description}}
 						</p>
-
-						<!--  -->
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
@@ -122,26 +121,32 @@
 
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
+                                <form action="/add-cart" method="post" >
+                                    @if ($products->price !== NULL)
 									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
 										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num_product" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
-
-									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Thêm vào giỏ hàng
 									</button>
+                                    <input type="hidden" name="product_id" value="{{ $products->id }}">
+                                    @endif
+                                    @csrf
+                                </form>
+
 								</div>
+
 							</div>
 						</div>
 
-						<!--  -->
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 							<div class="flex-m bor9 p-r-10 m-r-11">
 								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
@@ -163,6 +168,7 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
 
 			<div class="bor10 m-t-50 p-t-43 p-b-40">

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 /*
@@ -44,16 +43,28 @@ Route::group([
 
 /*
 |--------------------------------------------------------------------------
+| Route Login Admin
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin/login')->group( function (){
+    Route::get('/',[App\Http\Controllers\Admin\LoginController::class,'index'])->name('login');
+    Route::post('/',[App\Http\Controllers\Admin\LoginController::class,'postLogin']);
+});
+/*
+|--------------------------------------------------------------------------
+| Route Cart
+|--------------------------------------------------------------------------
+*/
+Route::post('/add-cart',[App\Http\Controllers\CartController::class,'index']);
+Route::get('/carts',[App\Http\Controllers\CartController::class,'show']);
+Route::post('/update-cart',[App\Http\Controllers\CartController::class,'update']);
+Route::get('/carts/delete/{id}',[App\Http\Controllers\CartController::class,'remove']);
+
+/*
+|--------------------------------------------------------------------------
 | Route Group Admin
 |--------------------------------------------------------------------------
 */
-
-//--Route Login Admin--//
-Route::prefix('admin/login')->group( function (){
-    Route::get('/',[LoginController::class,'index'])->name('login');
-    Route::post('/',[LoginController::class,'postLogin']);
-});
-
 Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'prefix' => '/',

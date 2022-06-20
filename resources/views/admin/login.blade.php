@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{{url('siteadmin')}}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="{{url('siteadmin')}}/assets/img/favicon.png">
-  <title>
-    Login
-  </title>
+  <title>Login</title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
@@ -60,21 +58,22 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control">
+                <form action="" method="POST"  enctype="multipart/form-data" role="form" class="text-start">
+                    @csrf
+                    <div class="input-group input-group-outline my-3">
+                    <label  class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control">
+                    <label  class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control">
                   </div>
                   <div class="form-check form-switch d-flex align-items-center mb-3">
-                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                    <input name="remember" class="form-check-input" type="checkbox" id="rememberMe">
                     <label class="form-check-label mb-0 ms-2" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                   </div>
                   <p class="mt-4 text-sm text-center">
                     Don't have an account?
@@ -84,13 +83,17 @@
               </div>
             </div>
           </div>
+          @if (Session::has('error'))
+          <div class="alert alert-danger">
+              {{Session::get('error')}}
+          </div>
+          @endif
         </div>
+
       </div>
       <footer class="footer position-absolute bottom-2 py-2 w-100">
         <div class="container">
           <div class="row align-items-center justify-content-lg-between">
-
-
           </div>
         </div>
       </footer>
@@ -110,9 +113,6 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{url('siteadmin')}}/assets/js/material-dashboard.min.js?v=3.0.3"></script>
 </body>
 

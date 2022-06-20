@@ -33,6 +33,11 @@ Route::group([
             'as' => 'home.index',
             'uses' => 'HomeController@index',
         ]);
+        Route::get('/{id}/{slug}.html', [
+            'as' => 'home.view',
+            'uses' => 'HomeController@view',
+        ]);
+
     });
 });
 
@@ -53,13 +58,21 @@ Route::group([
         'prefix' => 'admin'
     ], function () {
         Route::get('/', [
-            'as' => 'admin.DashboardController.index',
+            'as' => 'admin.dashboard.index',
             'uses' => 'DashboardController@index',
             // registered permission here
         ]);
         Route::get('/login', [
-            'as' => 'admin.LoginController.index',
+            'as' => 'login',
             'uses' => 'LoginController@index',
+        ]);
+        Route::post('/login', [
+            'as' => 'login',
+            'uses' => 'LoginController@postLogin',
+        ]);
+        Route::get('/logout', [
+            'as' => 'admin.logout',
+            'uses' => 'LoginController@logout',
         ]);
 
         /*---------------------
@@ -67,9 +80,9 @@ Route::group([
         ----------------------*/
         Route::group([
             'prefix' => '/product',
-            ['middleware' => [
-            // registered middleware here
-            ]]
+            'middleware' => [
+                'auth'
+            ]
         ], function () {
             // Crud routes
             Route::get('/', [
@@ -108,9 +121,9 @@ Route::group([
         ----------------------*/
         Route::group([
             'prefix' => '/category',
-            ['middleware' => [
-            // registered middleware here
-            ]]
+            'middleware' => [
+                'auth'
+            ]
         ], function () {
             // Crud routes
             Route::get('/', [
@@ -137,7 +150,6 @@ Route::group([
                 'as' => 'admin.category.update',
                 'uses' => 'CategoryController@update'
             ]);
-
             Route::delete('destroy/{id}', [
                 'as' => 'admin.category.destroy',
                 'uses' => 'CategoryController@destroy'

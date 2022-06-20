@@ -35,6 +35,8 @@
 	<link rel="stylesheet" type="text/css" href="{{url('site')}}/css/main.css">
 <!--===============================================================================================-->
 </head>
+
+
 <body class="animsition">
 
 	<!-- Header -->
@@ -71,10 +73,10 @@
 								<a href="{{route('home.index')}}">TRANG CHỦ</a>
 							</li>
 							<li>
-								<a href="#" >SẢN PHẨM</a>
+								<a >DANH MỤC</a>
 								<ul class="sub-menu">
-								@foreach($category as $item)
-									<li><a href="#">{{$item->name}}</a></li>
+								    @foreach($category as $item)
+                                    <li><a href="{{route('home.view',['id'=>$item->id,'slug'=>$item->slug])}}">{{$item->name}}</a></li>
 									@endforeach
 								</ul>
 
@@ -161,15 +163,13 @@
 				</li>
 
 				<li>
-					<a>Sản phẩm</a>
+					<a>Danh mục</a>
 						<ul class="sub-menu-m">
 							@foreach($category as $item)
 							<li><a href="#">{{$item->name}}</a></li>
 							@endforeach
 						</ul>
 				</li>
-
-
 				<li>
 					<a href="#">Bài viết</a>
 				</li>

@@ -47,10 +47,22 @@ class CartController extends Controller
 
     public function addCart(Request $request)
     {
+        $this->validate($request,[
+            'name'=>'required',
+            'phone'=>'required',
+            'email'=>'required',
+            'address'=>'required',
+
+        ],[
+            'name.required' => 'Tên không được để trống',
+            'phone.required' => 'Điện thoại không được để trống',
+            'email.required' => 'Email không được để trống',
+            'address.required' => 'Địa không được để trống',
+        ]);
 
         $this->cartService->addCart($request);
 
-        return redirect()->back();
+        return redirect()->route('home.index');
     }
 
 }

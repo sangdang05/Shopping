@@ -110,21 +110,30 @@
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name"
                                                 placeholder="Tên khách Hàng" >
                                         </div>
-
+                                        @error('name')
+                                        <div class="stext-111 alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone"
                                                 placeholder="Số Điện Thoại" >
                                         </div>
-
+                                        @error('phone')
+                                        <div class="stext-111 alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address"
                                                 placeholder="Địa Chỉ Giao Hàng">
                                         </div>
-
+                                        @error('address')
+                                        <div class="stext-111 alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email"
                                                 placeholder="Email Liên Hệ">
                                         </div>
+                                        @error('email')
+                                        <div class="stext-111 alert alert-danger">{{ $message }}</div>
+                                        @enderror
 
                                         <div class="bor8 bg0 m-b-12">
                                             <textarea class="cl8 plh3 size-111 p-lr-15" name="content"></textarea>
@@ -134,7 +143,7 @@
                                 </div>
                             </div>
 
-                            <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                            <button class="flex-c-m stext-101 cl0 size-116 bg3 bor4 hov-btn3 p-lr-15 trans-04 pointer">
                                 Đặt Hàng
                             </button>
                         </div>

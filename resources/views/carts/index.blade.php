@@ -108,12 +108,12 @@
 
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name"
-                                                placeholder="Tên khách Hàng" required>
+                                                placeholder="Tên khách Hàng" >
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone"
-                                                placeholder="Số Điện Thoại" required>
+                                                placeholder="Số Điện Thoại" >
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">

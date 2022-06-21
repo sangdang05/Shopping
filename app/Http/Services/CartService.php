@@ -93,11 +93,10 @@ class CartService
             $this->infoProductCart($carts, $customer->id);
 
             DB::commit();
-            Session::flash('success', 'Đặt Hàng Thành Công');
+            Session::flash('success', 'Đặt hàng thành công');
 
             #Queue
             // SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
-
             Session::forget('carts');
         } catch (\Exception $err) {
             DB::rollBack();
@@ -111,11 +110,13 @@ class CartService
     {
         $productId = array_keys($carts);
         $products = Product::select('id', 'name', 'price', 'price_sale', 'image')
-            ->where('active', 1)
+            ->where('status', 1)
             ->whereIn('id', $productId)
             ->get();
 
+
         $data = [];
+
         foreach ($products as $product) {
             $data[] = [
                 'customer_id' => $customer_id,
@@ -124,7 +125,6 @@ class CartService
                 'price' => $product->price_sale != 0 ? $product->price_sale : $product->price
             ];
         }
-
         return Cart::insert($data);
     }
     public function getCustomer()

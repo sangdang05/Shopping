@@ -89,6 +89,11 @@
 							<li>
 								<a href="#">LIÊN HỆ</a>
 							</li>
+                            <li>
+								<a href="#">
+
+                                </a>
+							</li>
 						</ul>
 					</div>
 
@@ -97,15 +102,16 @@
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
-
+                        @php
+                        $cart = Session::get('carts');
+                        $countCart = count($cart);
+                        @endphp
                         <a href="/carts">
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                        data-notify="{{ count(Illuminate\Support\Facades\Session::get('carts')) }}">
+                        data-notify="{{ isset($countCart) ? $countCart : 0 }}">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
                         </a>
-
-
 					</div>
 				</nav>
 			</div>

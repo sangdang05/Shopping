@@ -660,6 +660,4 @@
             </div>
         </div>
     </section>
-
-
 @endsection

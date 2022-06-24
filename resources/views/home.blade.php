@@ -156,110 +156,43 @@
 
                 <!-- Search product -->
                 <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                    <form action="{{ route('home.search') }}" method="GET">
                     <div class="bor8 dis-flex p-l-15">
-                        <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                        <button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
                             <i class="zmdi zmdi-search"></i>
                         </button>
 
-                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
+                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search"
                             placeholder="Search">
                     </div>
+                    </form>
                 </div>
 
                 <!-- Filter -->
                 <div class="dis-none panel-filter w-full p-t-10">
                     <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+
                         <div class="filter-col1 p-r-15 p-b-27">
                             <div class="mtext-102 cl2 p-b-15">
-                                Sort By
+                                Sắp xếp theo:
                             </div>
+                            <form >
+                                @csrf
+                                <div class="form-group col-8">
 
-                            <ul>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Default
-                                    </a>
-                                </li>
+                                    <select name="sort" id="select_price" class="form-control mtext-102" id="exampleFormControlSelect1">
+                                      <option value="{{ Request::url() }}?sort_by=none" {{ Request::collect()->first() == 'none' ? 'selected' : ''}} >Giá mặc định</option>
+                                      <option value="{{ Request::url() }}?sort_by=desc" {{ Request::collect()->first() == 'desc' ? 'selected' : ''}}>Cao tới thấp</option>
+                                      <option value="{{ Request::url() }}?sort_by=asc" {{ Request::collect()->first() == 'asc' ? 'selected' : ''}}>Thấp tới cao</option>
+                                    </select>
+                                  </div>
 
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Popularity
-                                    </a>
-                                </li>
+                            </form>
 
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Average rating
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                        Newness
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Price: Low to High
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Price: High to Low
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
-
-                        <div class="filter-col2 p-r-15 p-b-27">
-                            <div class="mtext-102 cl2 p-b-15">
-                                Price
-                            </div>
-
-                            <ul>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                        All
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        $0.00 - $50.00
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        $50.00 - $100.00
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        $100.00 - $150.00
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        $150.00 - $200.00
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        $200.00+
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
                         <div class="filter-col3 p-r-15 p-b-27">
                             <div class="mtext-102 cl2 p-b-15">
-                                Color
+                                Màu sắc
                             </div>
 
                             <ul>
@@ -293,35 +226,6 @@
                                     </a>
                                 </li>
 
-                                <li class="p-b-6">
-                                    <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-                                        <i class="zmdi zmdi-circle"></i>
-                                    </span>
-
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Green
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-                                        <i class="zmdi zmdi-circle"></i>
-                                    </span>
-
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        Red
-                                    </a>
-                                </li>
-
-                                <li class="p-b-6">
-                                    <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-                                        <i class="zmdi zmdi-circle-o"></i>
-                                    </span>
-
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                        White
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -379,4 +283,18 @@
         </div>
     </section>
 
+@endsection
+@section('js')
+<script>
+    // get url selected
+    $(document).ready(function (){
+      $('#select_price').on('change', function () {
+          var url = $(this).val();
+          if (url) {
+              window.location = url; // redirect
+          }
+          return false;
+      });
+    })
+</script>
 @endsection

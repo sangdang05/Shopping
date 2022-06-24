@@ -33,6 +33,10 @@ Route::group([
             'as' => 'home.index',
             'uses' => 'HomeController@index',
         ]);
+        Route::get('product', [
+            'as' => 'home.search',
+            'uses' => 'HomeController@search',
+        ]);
         Route::get('/{id}/{slug}.html', [
             'as' => 'home.view',
             'uses' => 'HomeController@view',

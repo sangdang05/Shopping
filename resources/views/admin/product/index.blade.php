@@ -4,7 +4,7 @@
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <div class="bg-gradient-info shadow-primary border-radius-sm pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3">Quản lý sản phẩm</h6>
               </div>
             </div>
@@ -41,7 +41,7 @@
                         <p class="text-xs font-weight-bold mb-0">{{$item->cat->name}}</p>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">{{$item->price}}</p>
+                        <p class="text-xs font-weight-bold mb-0">{{ number_format($item->price, 0, '', '.') . ' VND' }}</p>
                       </td>
                       <td class="align-middle text-center text-sm">
                         @if($item->status == 1)
@@ -57,13 +57,16 @@
                         @endif
                       </td>
                       <td class="align-middle  text-center ">
+                        @can('edit-products')
                         <a href="{{route('admin.product.edit',$item->id)}}">
                         <button type="button" class="btn bg-gradient-info btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Sửa sản phẩm" data-container="body" data-animation="true">Sửa</button>
                         </a>
-
+                        @endcan
+                        @can('delete-products')
                         <a class="btn-delete" href="{{route('admin.product.destroy',$item->id)}}">
                         <button type="button" class="btn bg-gradient-danger  btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa" data-container="body" data-animation="true">Xóa</button>
                         </a>
+                        @endcan
                       </td>
                     </tr>
                     @endforeach
@@ -74,12 +77,15 @@
           </div>
         </div>
       </div>
+      @can('add-products')
       <a href="{{route('admin.product.create')}}">
-      <button class="btn btn-icon btn-3 btn-success" type="button">
-        <span class="btn-inner--text">Thêm Sản Phẩm</span>
-      <span class="btn-inner--icon"><i class="fas fa-plus"></i>
-      </button>
-      </a>
+        <button class="btn btn-icon btn-3 btn-success" type="button">
+          <span class="btn-inner--text">Thêm Sản Phẩm</span>
+        <span class="btn-inner--icon"><i class="fas fa-plus"></i>
+        </button>
+        </a>
+      @endcan
+
 
 
     <form method="POST" id="form-delete" action="">

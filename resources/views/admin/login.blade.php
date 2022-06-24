@@ -59,7 +59,7 @@
               </div>
               <div class="card-body">
                 <form action="" method="POST"  enctype="multipart/form-data" role="form" class="text-start">
-                    @csrf
+                    {{ csrf_field() }}
                     <div class="input-group input-group-outline my-3">
                     <label  class="form-label">Email</label>
                     <input name="email" type="email" class="form-control">
@@ -75,19 +75,19 @@
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                   </div>
-                  <p class="mt-4 text-sm text-center">
-                    Don't have an account?
-                    <a href="../pages/sign-up.html" class="text-primary text-gradient font-weight-bold">Sign up</a>
-                  </p>
+
                 </form>
+                <div>
+                    @if (Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{Session::get('error')}}
+                    </div>
+                    @endif
+                </div>
               </div>
             </div>
           </div>
-          @if (Session::has('error'))
-          <div class="alert alert-danger">
-              {{Session::get('error')}}
-          </div>
-          @endif
+
         </div>
 
       </div>

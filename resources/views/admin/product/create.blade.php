@@ -1,10 +1,8 @@
 @extends('layouts.admin')
-@section('css')
-<link href="{{ url('public/siteadmin') }}/css/style.css" rel="stylesheet" />
-@endsection
+
 @section('main')
 <div class="colum card container-fluid py-4 px-4">
-<form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row  ">
             <div class="col">
@@ -19,7 +17,7 @@
             <div class="col">
                 <label for="exampleFormControlSelect1" class="ms-0 font-weight-bolder">Giá :</label>
                 <div class="input-group input-group-outline my-3">
-                
+
                 <input name="price" type="text" class="form-control">
                 </div>
             </div>
@@ -79,24 +77,24 @@
             <div class="col">
                 <label for="exampleFormControlSelect1" class="ms-0 font-weight-bolder"> Thứ tự ưu tiên :</label>
                 <div class="input-group input-group-outline my-3">
-               
+
                 <input type="number" name="prioty" class="form-control">
                 </div>
             </div>
             @error('prioty')
                     <div id="helpId" class="text-red">{{ $message }}</div>
             @enderror
-            
+
         </div>
-     
+
       <button class="btn btn-icon btn-3 btn-success" type="submit">
         <span class="btn-inner--text">Thêm Sản Phẩm</span>
       </button>
-     
+
 </form>
 </div>
 
 @endsection
 @section('slug')
-<script src="{{ url('public/siteadmin') }}/js/slug.js"></script>
+<script src="{{ url('siteadmin') }}/js/slug.js"></script>
 @endsection

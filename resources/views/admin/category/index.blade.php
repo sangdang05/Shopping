@@ -65,6 +65,9 @@
               </div>
             </div>
           </div>
+          <div class="">
+            {{ $category->appends(request()->all())->links() }}
+        </div>
         </div>
       </div>
 

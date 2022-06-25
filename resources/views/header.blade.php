@@ -22,7 +22,7 @@
 
                 <!-- Logo desktop -->
                 <a href="{{ route('home.index') }}" class="logo">
-                    <img src="{{ url('site') }}/images/icons/logo-01.png" alt="IMG-LOGO">
+                    <img width="150" src="{{ url('site') }}/images/icons/logo.png" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
@@ -92,7 +92,7 @@
             </div>
 
             <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                data-notify="2">
+                data-notify="{{ !is_null(Session::get('carts')) ? count(Session::get('carts')) : 0 }}">
                 <i class="zmdi zmdi-shopping-cart"></i>
             </div>
 

@@ -18,7 +18,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $data= Role::orderBy('created_at','DESC')->get();
+        $data= Role::orderBy('created_at','DESC')->paginate(10);
         return view('admin.roles.index',compact('data'));
     }
 

@@ -75,6 +75,9 @@
               </div>
             </div>
           </div>
+          <div class="">
+            {{ $product->appends(request()->all())->links() }}
+        </div>
         </div>
       </div>
       @can('add-products')

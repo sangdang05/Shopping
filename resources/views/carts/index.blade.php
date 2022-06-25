@@ -3,6 +3,7 @@
     <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_SANDBOX_CLIENT_ID') }}"></script>
 @endsection
 @section('main')
+
 @php $total = 0; @endphp
     @if (count($products) != 0)
         <div class="container">
@@ -152,14 +153,7 @@
                             <div class="flex-c-m m-b-10 stext-101  btn-paypal stext-101 size-116 p-lr-15 trans-04 pointer">
                                 <img width="60" class="m-r-10" src=" {{ url('site') }}/images/paypal.png" alt="">
                                 {{ round($total/23000,2) }} USD
-                                @if (\Session::has('error'))
-                                    <div class="alert alert-danger">{{ \Session::get('error') }}</div>
-                                    {{ \Session::forget('error') }}
-                                @endif
-                                @if (\Session::has('success'))
-                                    <div class="alert alert-success">{{ \Session::get('success') }}</div>
-                                    {{ \Session::forget('success') }}
-                                @endif
+
                             </div>
                             </a>
 

@@ -48,6 +48,7 @@ Route::group([
 | Route Paypal
 |--------------------------------------------------------------------------
 */
+// Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
 Route::get('process-transaction/{price}', [PayPalController::class, 'processTransaction'])->name('processTransaction');
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
@@ -69,7 +70,7 @@ Route::post('/add-cart',[App\Http\Controllers\CartController::class,'index']);
 Route::get('/carts',[App\Http\Controllers\CartController::class,'show']);
 Route::post('/update-cart',[App\Http\Controllers\CartController::class,'update']);
 Route::get('/carts/delete/{id}',[App\Http\Controllers\CartController::class,'remove']);
-Route::post('/carts',[App\Http\Controllers\CartController::class,'addCart']);
+Route::post('/carts',[App\Http\Controllers\CartController::class,'addCart'])->name('cart');
 /*
 |--------------------------------------------------------------------------
 | Route Group Admin

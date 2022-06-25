@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -24,6 +24,7 @@ class PayPalController extends Controller
      */
     public function processTransaction(Request $request,$price)
     {
+
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
@@ -54,12 +55,12 @@ class PayPalController extends Controller
             }
 
             return redirect()
-                ->route('createTransaction')
+                ->route('cart')
                 ->with('error', 'Đã xảy ra sự cố thanh toán!');
 
         } else {
             return redirect()
-                ->route('createTransaction')
+                ->route('cart')
                 ->with('error', $response['message'] ?? 'Đã xảy ra sự cố thanh toán!');
         }
     }
@@ -75,14 +76,14 @@ class PayPalController extends Controller
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
-
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            Session::forget('carts');
             return redirect()
-                ->route('createTransaction')
+                ->route('cart')
                 ->with('success', 'Thanh toán thành công!');
         } else {
             return redirect()
-                ->route('createTransaction')
+                ->route('cart')
                 ->with('error', $response['message'] ?? 'Đã xảy ra sự cố thanh toán!');
         }
     }
@@ -95,7 +96,7 @@ class PayPalController extends Controller
     public function cancelTransaction(Request $request)
     {
         return redirect()
-            ->route('createTransaction')
-            ->with('error', $response['message'] ?? 'You have canceled the transaction.');
+            ->route('cart')
+            ->with('error', $response['message'] ?? 'Bạn đã hủy giao dịch!');
     }
 }

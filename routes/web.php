@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
+use App\Http\Controllers\PayPalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,6 @@ use Illuminate\Http\Response;
 | Route Group Users
 |--------------------------------------------------------------------------
 */
-
 Route::group([
     'namespace' => 'App\Http\Controllers',
     'middleware' => [
@@ -41,10 +41,16 @@ Route::group([
             'as' => 'home.view',
             'uses' => 'HomeController@view',
         ]);
-
     });
 });
-
+/*
+|--------------------------------------------------------------------------
+| Route Paypal
+|--------------------------------------------------------------------------
+*/
+Route::get('process-transaction/{price}', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
 /*
 |--------------------------------------------------------------------------
 | Route Login Admin

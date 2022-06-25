@@ -74,6 +74,7 @@ class CartService
 
     public function addCart($request)
     {
+
         try {
             DB::beginTransaction();
 
@@ -81,6 +82,11 @@ class CartService
 
             if (is_null($carts))
                 return false;
+            $productId = array_keys($carts);
+            $products = Product::select('id', 'name', 'price', 'price_sale', 'image')
+                ->where('status', 1)
+                ->whereIn('id', $productId)
+                ->get();
 
             $customer = Customer::create([
                 'name' => $request->input('name'),

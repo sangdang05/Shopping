@@ -35,10 +35,14 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ url('site') }}/css/util.css">
     <link rel="stylesheet" type="text/css" href="{{ url('site') }}/css/main.css">
+    <link rel="stylesheet" type="text/css" href="{{ url('site') }}/css/style.css">
     <!--===============================================================================================-->
+    @yield('js-paypal')
+    <!--===============================================================================================-->
+    @yield('css')
+
+
 </head>
-
-
 <body class="animsition">
 
     <!-- Header -->

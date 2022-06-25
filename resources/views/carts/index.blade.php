@@ -1,14 +1,17 @@
 @extends('layouts.site')
+@section('js-paypal')
+    <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_SANDBOX_CLIENT_ID') }}"></script>
+@endsection
 @section('main')
-    <form class="bg0 p-t-130 p-b-85" method="post">
-
-        @if (count($products) != 0)
-            <div class="container">
+@php $total = 0; @endphp
+    @if (count($products) != 0)
+        <div class="container">
+            <form class="bg0 p-t-130 " method="post">
                 <div class="row">
                     <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                         <div class="m-l-25 m-r--38 m-lr-0-xl">
                             <div class="wrap-table-shopping-cart">
-                                @php $total = 0; @endphp
+
                                 <table class="table-shopping-cart">
                                     <tbody>
                                         <tr class="table_head">
@@ -108,58 +111,74 @@
 
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name"
-                                                placeholder="Tên khách Hàng" >
+                                                placeholder="Tên khách Hàng">
                                         </div>
                                         @error('name')
-                                        <div class="stext-111 alert alert-danger">{{ $message }}</div>
+                                            <div class="stext-111 alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone"
-                                                placeholder="Số Điện Thoại" >
+                                                placeholder="Số Điện Thoại">
                                         </div>
                                         @error('phone')
-                                        <div class="stext-111 alert alert-danger">{{ $message }}</div>
+                                            <div class="stext-111 alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address"
                                                 placeholder="Địa Chỉ Giao Hàng">
                                         </div>
                                         @error('address')
-                                        <div class="stext-111 alert alert-danger">{{ $message }}</div>
+                                            <div class="stext-111 alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email"
                                                 placeholder="Email Liên Hệ">
                                         </div>
                                         @error('email')
-                                        <div class="stext-111 alert alert-danger">{{ $message }}</div>
+                                            <div class="stext-111 alert alert-danger">{{ $message }}</div>
                                         @enderror
 
                                         <div class="bor8 bg0 m-b-12">
                                             <textarea class="cl8 plh3 size-111 p-lr-15" name="content"></textarea>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-
                             <button class="flex-c-m stext-101 cl0 size-116 bg3 bor4 hov-btn3 p-lr-15 trans-04 pointer">
-                                Đặt Hàng
-                            </button>
+                                Đặt Hàng</button>
+                            <p class="stext-101 p-t-15 p-b-15">hoặc</p>
+
+                            <a  href="{{ route('processTransaction', round($total/23000,2)) }}">
+                            <div class="flex-c-m m-b-10 stext-101  btn-paypal stext-101 size-116 p-lr-15 trans-04 pointer">
+                                <img width="60" class="m-r-10" src=" {{ url('site') }}/images/paypal.png" alt="">
+                                {{ round($total/23000,2) }} USD
+                                @if (\Session::has('error'))
+                                    <div class="alert alert-danger">{{ \Session::get('error') }}</div>
+                                    {{ \Session::forget('error') }}
+                                @endif
+                                @if (\Session::has('success'))
+                                    <div class="alert alert-success">{{ \Session::get('success') }}</div>
+                                    {{ \Session::forget('success') }}
+                                @endif
+                            </div>
+                            </a>
+
+
                         </div>
+
                     </div>
                 </div>
-            </div>
-    </form>
-@else
-    <form class="bg0 p-t-130 p-b-85">
-        <div class="wrap-table-shopping-cart">
-            <table class="table-shopping-cart">
-                <div class="mtext-109 text-center">Giỏ hàng trống</div>
-            </table>
+
+            </form>
+
         </div>
-    </form>
+    @else
+        <form class="bg0 p-t-130 p-b-85">
+            <div class="wrap-table-shopping-cart">
+                <table class="table-shopping-cart">
+                    <div class="mtext-109 text-center">Giỏ hàng trống</div>
+                </table>
+            </div>
+        </form>
     @endif
 @endsection
-
-

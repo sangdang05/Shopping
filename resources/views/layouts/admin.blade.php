@@ -7,8 +7,8 @@ $menu = config('menu');
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{url('site')}}/images/icons/favicon.png">
-  <link rel="icon" type="image/png" href="{{url('site')}}/images/icons/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="{{url('public/site')}}/images/icons/favicon.png">
+  <link rel="icon" type="image/png" href="{{url('public/site')}}/images/icons/favicon.png"/>
   <title>
    Dashboard
   </title>
@@ -36,7 +36,7 @@ $menu = config('menu');
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0 d-flex justify-content-center" href="{{route('home.index')}}" target="_blank">
 
-        <img src="{{url('site')}}/images/icons/logo-2.png" alt="IMG-LOGO">
+        <img src="{{url('public/site')}}/images/icons/logo-2.png" alt="IMG-LOGO">
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">

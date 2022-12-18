@@ -5,7 +5,7 @@
     <section class="section-slide">
         <div class="wrap-slick1">
             <div class="slick1">
-                <div class="item-slick1" style="background-image: url({{ url('site') }}/images/slide-04.jpg);">
+                <div class="item-slick1" style="background-image: url({{ url('public/site') }}/images/slide-04.jpg);">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url({{ url('site') }}/images/slide-2.jpg);">
+                <div class="item-slick1" style="background-image: url({{ url('public/site') }}/images/slide-2.jpg);">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="slideInRight" data-delay="0">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url({{ url('site') }}/images/slide-3.jpg);">
+                <div class="item-slick1" style="background-image: url({{ url('public/site') }}/images/slide-3.jpg);">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="zoomInRight" data-delay="0">
@@ -90,7 +90,7 @@
                     <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                         <!-- Block1 -->
                         <div class="block1 wrap-pic-w">
-                            <img src="{{ url('uploads') }}/category/{{ $item->image }}" alt="IMG-BANNER">
+                            <img src="{{ url('public/uploads') }}/category/{{ $item->image }}" alt="IMG-BANNER">
 
                             <a href="{{ route('home.view', ['id' => $item->id, 'slug' => $item->slug]) }}"
                                 class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -239,7 +239,7 @@
                         <a href="{{ route('home.view', ['id' => $item->id, 'slug' => $item->slug]) }}">
                             <div class="block2">
                                 <div class="block2-pic hov-img0">
-                                    <img src="{{ url('uploads') }}/product/{{ $item->image }}" alt="IMG-PRODUCT">
+                                    <img src="{{ url('public/uploads') }}/product/{{ $item->image }}" alt="IMG-PRODUCT">
 
                                     <a href="{{ route('home.view', ['id' => $item->id, 'slug' => $item->slug]) }}"
                                         class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
@@ -261,9 +261,9 @@
                                     <div class="block2-txt-child2 flex-r p-t-3">
                                         <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
                                             <img class="icon-heart1 dis-block trans-04"
-                                                src="{{ url('site') }}/images/icons/icon-heart-01.png" alt="ICON">
+                                                src="{{ url('public/site') }}/images/icons/icon-heart-01.png" alt="ICON">
                                             <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                                                src="{{ url('site') }}/images/icons/icon-heart-02.png" alt="ICON">
+                                                src="{{ url('public/site') }}/images/icons/icon-heart-02.png" alt="ICON">
                                         </a>
                                     </div>
                                 </div>

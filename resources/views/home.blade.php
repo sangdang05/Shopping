@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url({{ url('public/site') }}/images/slide-3.jpg);">
+                <div class="item-slick1" style="background-image: url({{ url('public/site') }}/images/slide-01.jpg);">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="zoomInRight" data-delay="0">

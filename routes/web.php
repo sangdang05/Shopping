@@ -20,19 +20,20 @@ use App\Http\Controllers\PayPalController;
 | Route Group Users
 |--------------------------------------------------------------------------
 */
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+
+
 Route::group([
     'namespace' => 'App\Http\Controllers',
-    'middleware' => [
-        // registered middleware here
-    ],
+
 ], function () {
     Route::group([
         'prefix' => ''
     ], function () {
-        Route::get('/', [
-            'as' => 'home.index',
-            'uses' => 'HomeController@index',
-        ]);
+        // Route::get('/', [
+        //     // 'as' => 'home.index',
+        //     // 'uses' => 'HomeController@index',
+        // ]);
         Route::get('product', [
             'as' => 'home.search',
             'uses' => 'HomeController@search',
